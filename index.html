@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ペンギンブラウザ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="nav-bar">
+            <button onclick="prevHistory();" title="戻る">◀︎</button>
+            <button onclick="nextHistory();" title="進む">▶︎</button>
+            <button onclick="refreshPage();" title="更新">🔄</button>
+            <form class="address-bar" onsubmit="search(); return false;">
+                <input type="text" id="search-box" onfocus="this.select();" placeholder="Googleで検索">
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <webview class="webview" src="https://www.google.com/"></webview>
+    </main>
+
+    <script>
+
+        // 一つ前のページに戻る
+        function prevHistory() {
+            document.querySelector('.webview').goBack();
+        }
+
+        // 次のページに進む
+        function nextHistory() {
+            document.querySelector('.webview').goForward();
+        }
+
+        // ページを更新する
+        function refreshPage() {
+            document.querySelector('.webview').reload();
+        }
+
+        // 検索する
+        function search() {
+            const searchQuery = document.getElementById('search-box').value;
+            document.querySelector('.webview').src = `https://www.google.com/search?q=${searchQuery}`;   
+        }
+
+    </script>
+</body>
+</html>
